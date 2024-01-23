@@ -30,3 +30,7 @@ def update(id):
     title = request.form.get("title")
     body = request.form.get("body")
     return db.posts_update_by_id(id, user_id, title, body)
+
+@app.route("/posts/<id>.json", methods=["DELETE"])
+def destroy(id):
+    return db.posts_destroy_by_id(id)

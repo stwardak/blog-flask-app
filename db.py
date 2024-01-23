@@ -95,3 +95,16 @@ def posts_update_by_id(id, user_id, title, body):
     conn.commit()
     return dict(row)
 # how do i make it take in params or if blank stays the same (user_id)
+
+
+def posts_destroy_by_id(id):
+    conn = connect_to_db()
+    row = conn.execute(
+        """
+        DELETE from posts
+        WHERE id = ?
+        """,
+        id,
+    )
+    conn.commit()
+    return {"message": "Post destroyed successfully"}
