@@ -1,7 +1,10 @@
 from flask import Flask, request
 import db
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/')
@@ -34,3 +37,7 @@ def update(id):
 @app.route("/posts/<id>.json", methods=["DELETE"])
 def destroy(id):
     return db.posts_destroy_by_id(id)
+
+@app.route("/")
+def helloWorld():
+  return "Hello, cross-origin-world!"
