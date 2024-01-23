@@ -81,3 +81,17 @@ def posts_find_by_id(id):
         id,
     ).fetchone()
     return dict(row)
+
+def posts_update_by_id(id, user_id, title, body):
+    conn = connect_to_db()
+    row = conn.execute(
+        """
+        UPDATE posts SET user_id = ?, title = ?, body = ?
+        WHERE id = ?
+        RETURNING *
+        """,
+        (user_id, title, body, id),
+    ).fetchone()
+    conn.commit()
+    return dict(row)
+# how do i make it take in params or if blank stays the same (user_id)
