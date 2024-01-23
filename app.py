@@ -18,3 +18,7 @@ def create():
     title = request.form.get("title")
     body = request.form.get("body")
     return db.posts_create(user_id, title, body)
+
+@app.route("/posts/<id>.json")
+def show(id):
+    return db.posts_find_by_id(id)
